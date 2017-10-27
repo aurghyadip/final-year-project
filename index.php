@@ -21,12 +21,15 @@
 
 	<body>
 		<div class="container">
+			<p class="display-1" style="text-align: center;">Search Books</p>
 			<form name="f1" action="search.php" method="get">
 				<div class="form-group">
-				    <label for="isbn">ISBN</label>
-				    <input type="text" name="isbn" class="form-control" id="isbn" placeholder="9781234567890">
+				    <input type="text" name="isbn" class="form-control" id="isbn" placeholder="Enter ISBN-10 or ISBN-13 of a Book">
 			  	</div>
-			  	<button type="submit" class="btn btn-primary">Submit</button>
+			  	<div class="d-flex justify-content-center">
+			  		<button type="submit" class="btn btn-primary">Submit</button>
+			  	</div>
+			  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			</form>
 		</div>
 	</body>
