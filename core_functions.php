@@ -1,19 +1,12 @@
 <?php
-	/**
-	* Functions that are useful in core applications
-	* 	i.e. rertrieving data from Google Books API.
-	* 
-	* Do not add any functions here.
-	*/
 
 	/**
-	* Get the book class from the Google Books API.
-	* 
-	* @param string $isbn
-	* 	**Description :** Takes ISBN10 or ISBN13 of a
-	* 	book retrieved from the `$_GET["ISBN"]` as input.
-	* @return stdClass
-	*/
+	 * Gets the volumeInfo object from the Gppgle Books API
+	 *
+	 * @param      string  $isbn   ISBN from the $_GET['isbn']
+	 *
+	 * @return     stdClass  book object for further usage
+	 */
 	function getBook($isbn)
 	{
 		$gbooks = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:".$isbn);
@@ -22,14 +15,14 @@
 		return $book;
 	}
 
+
 	/**
-	* Get Title of the book from API.
-	* 
-	* @param stdClass $book
-	* **Description :** Takes the stdClass that is returned from
-	* 	the function `getBook()`.
-	* @return string
-	*/
+	 * Gets the Book Title from the Google Books API
+	 *
+	 * @param      stdClass  $book   The book object that is returned by getBook()
+	 *
+	 * @return     string  Title of the book(if available)
+	 */
 	function getBookTitle($book)
 	{
 		if(property_exists($book, 'title'))
@@ -38,14 +31,14 @@
 		}
 	}
 
+	
 	/**
-	* Get Subtitle of the book from API.
-	* 
-	* @param stdClass $book 
-	* **Description :** Takes the stdClass that is returned from
-	* 	the function `getBook()`.
-	* @return string
-	*/
+	 * Gets the subtitle of the book from the Google Books API
+	 *
+	 * @param      stdClass  $book   book object returned by getBook()
+	 *
+	 * @return     string  The subtitle of the book.
+	 */
 	function getBookSubtitle($book)
 	{
 		if(property_exists($book, 'subtitle'))
@@ -54,14 +47,14 @@
 		}
 	}
 
-	/** 
-	* Get Authors of the book from API, puts them in an array.
-	* 
-	* @param stdClass $book
-	* **Description :** Takes the stdClass that is returned from
-	* 	the function `getBook()`.
-	* @return array
-	*/
+
+	/**
+	 * Gets the authors of the book and puts them into a PHP array
+	 *
+	 * @param      stdClass  $book   book object returned by getBook()
+	 *
+	 * @return     array   Array of authors.
+	 */
 	function getBookAuthors($book)
 	{
 		$output = array();
@@ -72,14 +65,14 @@
 		return $output;
 	}
 
+
 	/**
-	* Get Description of the book from API.
-	*
-	* @param stdClass $book
-	* **Description :** Takes the stdClass that is returned from
-	* 	the function `getBook()`.
-	* @return string
-	*/
+	 * Gets the book description from Google Books API.
+	 *
+	 * @param      stdClass  $book   book object returned by getBook()
+	 *
+	 * @return     string    Description of the book(if available)
+	 */
 	function getBookDescription($book)
 	{
 		if(property_exists($book, 'description'))
@@ -88,14 +81,14 @@
 		}
 	}
 
-	/** 
-	* Get the link for the thumbnail of cover of the book from API. 
-	*
-	* @param stdClass $book
-	* **Description :** Takes the stdClass that is returned from
-	* 	the function `getBook()`.
-	* @return string
-	*/
+
+	/**
+	 * Gets the link of the thumbnail of the cover of the book
+	 *
+	 * @param      stdClass  $book   book object returned by getBook()
+	 *
+	 * @return     string  Link to the image
+	 */
 	function getBookImage($book)
 	{
 		if(property_exists($book, 'imageLinks'))

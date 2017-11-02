@@ -3,14 +3,12 @@
 	include_once 'core_functions.php';
 	
 	/**
-	*	Selects the ISBN13 from the
-	*	Google Books API, if an user
-	*	enters ISBN10 for a book, the
-	*	function still feeds the correct
-	*	ISBN13 number to all the data 
-	*	retrieving functions. SO, no
-	*	incompatibility issue occurs.
-	*/
+	 * Gets the ISBN13 from the industryIdentifiers in Google Books API. Useful for converting ISBN10 to ISBN13.
+	 *
+	 * @param      stdClass  $isbn_id  The industryIdentifier class from the Google Books API
+	 *
+	 * @return     string  returns the ISBN13 as a string to use it.
+	 */
 	function isbn13Selector($isbn_id)
 	{
 		foreach($isbn_id as $iid) 
@@ -23,11 +21,13 @@
 	}
 
 	/**
-	*	Returns the total number
-	*	of a said book in the whole
-	*	library.
-	*	If not available, returns N/A.
-	*/
+	 * Get the number of total copies available for a book in library.
+	 *
+	 * @param      string  $isbn   ISBN13 of the Book
+	 * @param      mysqli_connection_string  $con    Connection string from the mysqli_connect() function
+	 *
+	 * @return     string  (returns the number of total books available in the library)
+	 */
 	function totalBooks($isbn, $con)
 	{
 		$result = mysqli_query($con, "SELECT * from booksdb where isbn13 IN ('$isbn');");
@@ -43,10 +43,13 @@
 	}
 	
 	/**
-	*	Checks if a book is available or not.
-	*	If it is available, returns the number
-	*	of the copies available.
-	*/
+	 * Checks if a book is availble for renting in the library.
+	 *
+	 * @param      string          $isbn   ISBN13 of the book in question
+	 * @param      mysqli_connection_string          $con    Connection string from the mysqli_connect()
+	 *
+	 * @return     integer|string  returns the number of the books available to rent. Returns 0 if no book is available.
+	 */
 	function ifAvailable($isbn,$con)
 	{
 		$result = mysqli_query($con, "SELECT * from booksdb where isbn13 IN ('$isbn');");
@@ -62,20 +65,14 @@
 		}
 	}
 
-	/** 
-	* 	Function that executes the
-	*	Renting functionality of a
-	*	said book by identifying it
-	* 	with the ISBN13 and renting.
-	*	The rent date is set to
-	*	timestamp, and the default
-	* 	due date should be a month
-	*	from the rent date.
-	* 	Function should also exclude
-	*	non working days.
-	*/
-
-	//WORK IN PROGRSS ____ DO NOT USE THIS FUNCTION
+	/**
+	 * Function to rent a book.
+	 * WORK IN PROGRSS____ DO NOT USE THIS FUNCTION
+	 *
+	 * @param      string  $isbn     ISBN13 of the book
+	 * @param      string  $student  studentID maybe, not yet decided
+	 * @param      mysqli_connection_string  $con      Connection string from the mysqli_connect()
+	 */
 	function rentBook($isbn, $student, $con) 
 	{
 		mysqli_query($con,"
@@ -87,14 +84,14 @@
 		// Also required updation of the rent date
 	}
 
-	/**	
-	* 	Returns the Book Insight
-	* 	Who has taken the book and
-	* 	the due dates of the books,
-	* 	to check at a glance, for if
-	* 	a book is available in the
-	*	library.
-	*/
+	/**
+	 * Gets how many students have taken the book and returns their name and due date
+	 *
+	 * @param      string  $isbn   ISBN13 of the book
+	 * @param      mysqli_connection_string  $con    Connection string from the mysqli_connect()
+	 *
+	 * @return     array   Associative array of student names and due dates.
+	 */
 	function getBookInsight($isbn, $con)
 	{
 		$output = array();

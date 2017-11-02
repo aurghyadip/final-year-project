@@ -40,7 +40,7 @@
     "imgLink" => $imgLink,
     "totalBooks" => $totalBooks,
     "available" => $available,
-    "insight" => $insight // this thing is not working
+    "insight" => $insight 
   );
 
   // encoding the data to json
