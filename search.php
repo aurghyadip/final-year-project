@@ -8,15 +8,7 @@
   // Get the ISBN Number that the user entered in the field
   $isbn = $_GET["isbn"];
 
-  // Get contents from the Google Books API
-  $gbooks = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:".$isbn);
-  
-  // json_decode($gbooks, true) would return an associative array.
-  // default is false.
-  $gbooks = json_decode($gbooks);
-
-  // Get the usable section only.
-  $book = $gbooks->items[0]->volumeInfo;
+  $book = getBook($isbn);
   
   // getting the ISBN object from the 'book' class
   $isbnID = $book->industryIdentifiers; 

@@ -1,12 +1,8 @@
 <?php
-	/*
-	*	Core Functions, which is used to
-	*	retrieve data and format them from
-	*	the Google Books API.
-	*/
+	
 	include_once 'core_functions.php';
 	
-	/*
+	/**
 	*	Selects the ISBN13 from the
 	*	Google Books API, if an user
 	*	enters ISBN10 for a book, the
@@ -26,7 +22,7 @@
 		}
 	}
 
-	/*
+	/**
 	*	Returns the total number
 	*	of a said book in the whole
 	*	library.
@@ -46,7 +42,7 @@
         }
 	}
 	
-	/*
+	/**
 	*	Checks if a book is available or not.
 	*	If it is available, returns the number
 	*	of the copies available.
@@ -66,7 +62,7 @@
 		}
 	}
 
-	/* 
+	/** 
 	* 	Function that executes the
 	*	Renting functionality of a
 	*	said book by identifying it
@@ -91,7 +87,7 @@
 		// Also required updation of the rent date
 	}
 
-	/*	
+	/**	
 	* 	Returns the Book Insight
 	* 	Who has taken the book and
 	* 	the due dates of the books,
@@ -99,9 +95,6 @@
 	* 	a book is available in the
 	*	library.
 	*/
-
-	// Check the last commit to see why this function is not working 
-	// Commit SHA = f4da749701609b0bf962ee04bcb854588d7d0704
 	function getBookInsight($isbn, $con)
 	{
 		$output = array();
